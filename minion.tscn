@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dmminion001"]
+
+[ext_resource type="Script" path="res://minion.gd" id="1_minion"]
+[ext_resource type="Texture2D" uid="uid://diune8x0k8h35" path="res://boss/spritesheets/minion-45x66.png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 0, 45, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1"]
+atlas = ExtResource("2_tex")
+region = Rect2(45, 0, 45, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2"]
+atlas = ExtResource("2_tex")
+region = Rect2(90, 0, 45, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 66, 45, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1"]
+atlas = ExtResource("2_tex")
+region = Rect2(45, 66, 45, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2"]
+atlas = ExtResource("2_tex")
+region = Rect2(90, 66, 45, 66)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_minion"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_a1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_minion"]
+radius = 12.0
+height = 48.0
+
+[node name="Minion" type="CharacterBody2D" groups=["boss", "enemies"]]
+script = ExtResource("1_minion")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_minion")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_minion")

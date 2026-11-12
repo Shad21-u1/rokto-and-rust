@@ -1,0 +1,695 @@
+[gd_scene format=3 uid="uid://cviekavqg8su"]
+
+[ext_resource type="Script" uid="uid://x7rpdkcvfp1t" path="res://world.gd" id="1_world"]
+[ext_resource type="PackedScene" uid="uid://c3b3hh2ftumly" path="res://character_body_2d.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://wha4nto8noqx" path="res://grimreaper.tscn" id="3_grimreaper"]
+[ext_resource type="PackedScene" uid="uid://c6v2oaboss01" path="res://boss.tscn" id="4_boss"]
+[ext_resource type="PackedScene" uid="uid://dmminion001" path="res://minion.tscn" id="5_minion"]
+[ext_resource type="Texture2D" uid="uid://becfcdln7yw2h" path="res://JWDLx5AZBtI.jpg" id="6_background"]
+[ext_resource type="PackedScene" uid="uid://dx5vk13vsrk8d" path="res://wizardbosslevel_1.tscn" id="7_wizard1"]
+[ext_resource type="PackedScene" uid="uid://dy83fvhk7ico2" path="res://thewiseone.tscn" id="8_wiseone"]
+[ext_resource type="AudioStream" uid="uid://tcqkpk0sox0p" path="res://Nox Arcana.mp3" id="9_ioo17"]
+[ext_resource type="AudioStream" uid="uid://csgh1j47eabb" path="res://boss/spritesheets/Jesús Lastra - Cries From Hell.mp3" id="10_hellfire"]
+[ext_resource type="AudioStream" uid="uid://da3q082q3w854" path="res://boss/spritesheets/Jesús Lastra - Hydrosphere.mp3" id="11_present"]
+[ext_resource type="AudioStream" uid="uid://cu4uysbu3b5ow" path="res://Heroic Demise (New).mp3" id="12_k3n1d"]
+[ext_resource type="Script" uid="uid://cheilw0jmn4cb" path="res://main_menu.gd" id="13_mainmenu"]
+
+[sub_resource type="Gradient" id="Gradient_hell_sky"]
+offsets = PackedFloat32Array(0, 0.4, 0.75, 1)
+colors = PackedColorArray(0.24, 0.18, 0.35, 1, 0.5, 0.38, 0.68, 1, 0.74, 0.6, 0.9, 1, 0.92, 0.84, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hell_sky"]
+gradient = SubResource("Gradient_hell_sky")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_horizon_glow"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.85, 0.75, 1, 0, 0.88, 0.78, 1, 0.15, 0.94, 0.85, 1, 0.38)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_horizon_glow"]
+gradient = SubResource("Gradient_horizon_glow")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Curve" id="Curve_embers_scale"]
+_data = [Vector2(0, 0.7), 0.0, 0.5, 0, 0, Vector2(0.35, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), -1.4, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_hellfire_embers"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0.95, 0.94, 0.86, 1, 0.85, 0.85, 0.74, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0.45, 0.85, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.3, 0.22, 0.4, 0.15, 0.18, 0.12, 0.25, 0.35)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Curve" id="Curve_smoke_scale"]
+_data = [Vector2(0, 0.4), 0.0, 2.0, 0, 0, Vector2(0.5, 1.1), 0.5, 0.5, 0, 0, Vector2(1, 1.8), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_hellfire_smoke"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(0.92, 0.85, 1, 0, 0.9, 0.82, 0.98, 0.14, 0.85, 0.75, 0.96, 0)
+
+[sub_resource type="Curve" id="Curve_hellfire_scale"]
+_data = [Vector2(0, 0.3), 0.0, 2.5, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 0.8), -0.6, -0.6, 0, 0, Vector2(1, 0), -2.5, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_hellfire_main"]
+offsets = PackedFloat32Array(0, 0.22, 0.62, 1)
+colors = PackedColorArray(1, 1, 1, 0.95, 0.96, 0.9, 1, 0.9, 0.9, 0.78, 1, 0.75, 0.82, 0.68, 0.98, 0)
+
+[sub_resource type="Gradient" id="Gradient_hellfire_ground"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(1, 0.98, 1, 0.9, 0.94, 0.84, 1, 0.8, 0.85, 0.72, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(60000, 64)
+
+[sub_resource type="TileSet" id="TileSet_ground"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+bg_color = Color(0.06, 0.05, 0.1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.58, 0.38, 0.9, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_simple_bg"]
+bg_color = Color(0.04, 0.03, 0.07, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.22, 0.35, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_player_fill"]
+bg_color = Color(0.15, 0.88, 0.45, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 1, 0.65, 0.9)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_fill"]
+bg_color = Color(0.85, 0.18, 0.28, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal_panel"]
+bg_color = Color(0.07, 0.05, 0.12, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.48, 1, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.35, 0.1, 0.65, 0.4)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.15, 0.11, 0.25, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.45, 0.95, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.28, 0.18, 0.48, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.7, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="hellfiem" type="Node2D" unique_id=1543360798]
+script = ExtResource("1_world")
+
+[node name="SCENARIO" type="CanvasLayer" parent="." unique_id=820220913]
+layer = -100
+
+[node name="HellSkyBackdrop" type="TextureRect" parent="SCENARIO" unique_id=-1445784955]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_hell_sky")
+expand_mode = 1
+
+[node name="Sprite1" type="TextureRect" parent="SCENARIO" unique_id=255678796]
+modulate = Color(1.05, 0.94, 1.15, 0.95)
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Sprite2" type="TextureRect" parent="SCENARIO" unique_id=1851628570]
+modulate = Color(1.05, 0.94, 1.15, 0.95)
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_right = 1920.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HellHorizonGlow" type="TextureRect" parent="SCENARIO" unique_id=-1192019173]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -540.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_horizon_glow")
+expand_mode = 1
+
+[node name="BackgroundEmbers" type="CPUParticles2D" parent="SCENARIO" unique_id=-576672644]
+position = Vector2(960, 1080)
+amount = 30
+lifetime = 5.2
+preprocess = 4.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 70)
+direction = Vector2(-0.15, -1)
+spread = 30.0
+gravity = Vector2(-6, -18)
+initial_velocity_min = 12.0
+initial_velocity_max = 30.0
+tangential_accel_min = -10.0
+tangential_accel_max = 10.0
+scale_amount_max = 2.2
+scale_amount_curve = SubResource("Curve_embers_scale")
+color_ramp = SubResource("Gradient_hellfire_embers")
+
+[node name="HellVignette" type="TextureRect" parent="SCENARIO" unique_id=1948273615]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
+
+[node name="hellfire_smoke" type="CPUParticles2D" parent="." unique_id=1854450940]
+position = Vector2(1000, 0)
+amount = 28
+lifetime = 4.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(6000, 20)
+direction = Vector2(-0.2, -1)
+spread = 30.0
+gravity = Vector2(-10, -10)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+tangential_accel_min = -4.0
+tangential_accel_max = 4.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_smoke_scale")
+color_ramp = SubResource("Gradient_hellfire_smoke")
+
+[node name="hellfire" type="CPUParticles2D" parent="." unique_id=1854450933]
+position = Vector2(1000, 10)
+amount = 120
+lifetime = 2.0
+preprocess = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(6000, 16)
+direction = Vector2(0, -1)
+spread = 24.0
+gravity = Vector2(-4, -28)
+initial_velocity_min = 14.0
+initial_velocity_max = 28.0
+linear_accel_min = 4.0
+linear_accel_max = 12.0
+tangential_accel_min = -8.0
+tangential_accel_max = 8.0
+damping_min = 1.5
+damping_max = 3.5
+scale_amount_min = 1.8
+scale_amount_max = 3.6
+scale_amount_curve = SubResource("Curve_hellfire_scale")
+color_ramp = SubResource("Gradient_hellfire_main")
+
+[node name="hellfire_ground_flames" type="CPUParticles2D" parent="." unique_id=1854450937]
+position = Vector2(1000, 14)
+amount = 80
+lifetime = 0.9
+preprocess = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(6000, 4)
+direction = Vector2(0, -1)
+spread = 16.0
+gravity = Vector2(-2, -40)
+initial_velocity_min = 10.0
+initial_velocity_max = 22.0
+tangential_accel_min = -5.0
+tangential_accel_max = 5.0
+scale_amount_min = 1.5
+scale_amount_max = 2.8
+scale_amount_curve = SubResource("Curve_hellfire_scale")
+color_ramp = SubResource("Gradient_hellfire_ground")
+
+[node name="hellfire_embers" type="CPUParticles2D" parent="." unique_id=1854450935]
+position = Vector2(1000, 5)
+amount = 70
+lifetime = 3.0
+preprocess = 2.5
+emission_shape = 3
+emission_rect_extents = Vector2(6000, 22)
+direction = Vector2(-0.15, -1)
+spread = 32.0
+gravity = Vector2(-8, -18)
+initial_velocity_min = 15.0
+initial_velocity_max = 40.0
+tangential_accel_min = -12.0
+tangential_accel_max = 12.0
+scale_amount_min = 0.8
+scale_amount_max = 1.8
+scale_amount_curve = SubResource("Curve_embers_scale")
+color_ramp = SubResource("Gradient_hellfire_embers")
+
+[node name="GroundTiles" type="StaticBody2D" parent="." unique_id=1348427523]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTiles" unique_id=1902053183]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="TileMap" type="TileMap" parent="GroundTiles" unique_id=1585338753]
+tile_set = SubResource("TileSet_ground")
+format = 2
+
+[node name="PlaceholderFloor" type="Polygon2D" parent="GroundTiles" unique_id=1538527584]
+color = Color(0.14, 0.11, 0.18, 1)
+polygon = PackedVector2Array(-20000, 0, 35000, 0, 35000, 48, -20000, 48)
+
+[node name="LavaGlowLine" type="Polygon2D" parent="GroundTiles" unique_id=1538527585]
+color = Color(0.95, 0.88, 1, 0.9)
+polygon = PackedVector2Array(-20000, 0, 35000, 0, 35000, 2, -20000, 2)
+
+[node name="LavaUnderlayer" type="Polygon2D" parent="GroundTiles" unique_id=1538527586]
+color = Color(0.78, 0.62, 0.95, 0.55)
+polygon = PackedVector2Array(-20000, 2, 35000, 2, 35000, 8, -20000, 8)
+
+[node name="player" parent="." unique_id=2107892934 instance=ExtResource("2_player")]
+position = Vector2(-400, 0)
+
+[node name="Grimreaper" parent="." unique_id=106941628 instance=ExtResource("3_grimreaper")]
+position = Vector2(-320, -29)
+
+[node name="THEWISEONE" parent="." unique_id=1836319381 instance=ExtResource("8_wiseone")]
+position = Vector2(-120, 0)
+
+[node name="ALLMIND" parent="." unique_id=1494218604 instance=ExtResource("4_boss")]
+position = Vector2(420, 0)
+
+[node name="SUBMIND1" parent="." unique_id=558963819 instance=ExtResource("5_minion")]
+position = Vector2(350, 8)
+
+[node name="SUBMIND2" parent="." unique_id=492424490 instance=ExtResource("5_minion")]
+position = Vector2(490, 8)
+
+[node name="wizardbosslevel1" parent="." unique_id=755418676 instance=ExtResource("7_wizard1")]
+position = Vector2(1150, -40)
+
+[node name="EYES" type="Camera2D" parent="." unique_id=335044772]
+position = Vector2(-360, -20)
+zoom = Vector2(3.6, 3.6)
+position_smoothing_enabled = true
+
+[node name="Canvas" type="CanvasLayer" parent="." unique_id=422298928]
+
+[node name="CinematicBLACKEDGEBars" type="Control" parent="Canvas" unique_id=1405660307]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="ColorRect" parent="Canvas/CinematicBLACKEDGEBars" unique_id=992266101]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="ColorRect" parent="Canvas/CinematicBLACKEDGEBars" unique_id=1722851493]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Dialogues" type="PanelContainer" parent="Canvas" unique_id=187495879]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -460.0
+offset_top = -280.0
+offset_right = 460.0
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
+
+[node name="outeredgeline" type="MarginContainer" parent="Canvas/Dialogues" unique_id=1821606991]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 16
+
+[node name="BOX" type="VBoxContainer" parent="Canvas/Dialogues/outeredgeline" unique_id=1977307856]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SPEAKER" type="Label" parent="Canvas/Dialogues/outeredgeline/BOX" unique_id=2091878457]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.62, 1, 1)
+theme_override_font_sizes/font_size = 19
+text = "THE GRIM REAPER"
+
+[node name="DIALOGUES TEXT" type="RichTextLabel" parent="Canvas/Dialogues/outeredgeline/BOX" unique_id=1328632739]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.93, 0.95, 0.98, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "Awaken, lost traveler..."
+scroll_active = false
+
+[node name="SKIP BUTTON" type="Label" parent="Canvas/Dialogues/outeredgeline/BOX" unique_id=936902055]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.68, 0.82, 0.9)
+theme_override_font_sizes/font_size = 13
+text = "SPACE/CLICK"
+horizontal_alignment = 2
+
+[node name="HUDSYSTEMPROTOTYPE" type="Control" parent="Canvas" unique_id=1356313386]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HEALTH" type="HBoxContainer" parent="Canvas/HUDSYSTEMPROTOTYPE" unique_id=990380500]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 410.0
+offset_bottom = 54.0
+theme_override_constants/separation = 10
+
+[node name="TEXT" type="Label" parent="Canvas/HUDSYSTEMPROTOTYPE/HEALTH" unique_id=1853506088]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28, 0.98, 0.58, 1)
+theme_override_font_sizes/font_size = 15
+text = "NABAB AKA N'  |  HP: 8 / 8"
+
+[node name="HEALTHBar" type="ProgressBar" parent="Canvas/HUDSYSTEMPROTOTYPE/HEALTH" unique_id=810872500]
+custom_minimum_size = Vector2(340, 22)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_simple_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_player_fill")
+value = 100.0
+show_percentage = false
+
+[node name="BOSSHEALTH" type="VBoxContainer" parent="Canvas/HUDSYSTEMPROTOTYPE" unique_id=1066321716]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 24.0
+offset_right = 260.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="BossLabel" type="Label" parent="Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH" unique_id=1577938123]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.4, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "ALLMIND THE HELLSPAWN"
+horizontal_alignment = 1
+
+[node name="BOSSHEALTH" type="ProgressBar" parent="Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH" unique_id=1491456222]
+custom_minimum_size = Vector2(520, 14)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_simple_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boss_fill")
+value = 100.0
+show_percentage = false
+
+[node name="status" type="Label" parent="Canvas" unique_id=1931602721]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -40.0
+offset_right = 300.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 36
+text = "ALLMIND HAS FALLEN!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimelineModal" type="PanelContainer" parent="Canvas" unique_id=2081918301]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -125.0
+offset_right = 270.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal_panel")
+
+[node name="Margin" type="MarginContainer" parent="Canvas/TimelineModal" unique_id=2081918304]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/TimelineModal/Margin" unique_id=2081918305]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="Canvas/TimelineModal/Margin/VBox" unique_id=2081918306]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 22
+text = "TIMELINE RESTORED TEMPORARILY"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Canvas/TimelineModal/Margin/VBox" unique_id=2081918307]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.85, 0.95, 0.95)
+theme_override_font_sizes/font_size = 14
+text = "Level 1 Cleared!
+The Wizard has fallen and the temporal rift has opened.
+Do you want to return to your original present world?"
+horizontal_alignment = 1
+
+[node name="ButtonBox" type="HBoxContainer" parent="Canvas/TimelineModal/Margin/VBox" unique_id=2081918308]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="YesButton" type="Button" parent="Canvas/TimelineModal/Margin/VBox/ButtonBox" unique_id=2081918309]
+custom_minimum_size = Vector2(180, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 1, 0.65, 1)
+theme_override_colors/font_hover_color = Color(0.65, 1, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "[ YES ] RETURN TO PRESENT"
+
+[node name="NoButton" type="Button" parent="Canvas/TimelineModal/Margin/VBox/ButtonBox" unique_id=2081918310]
+custom_minimum_size = Vector2(160, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.5, 1)
+theme_override_colors/font_hover_color = Color(1, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "[ NO ] MAIN MENU"
+
+[node name="RebornModal" type="PanelContainer" parent="Canvas" unique_id=2081918400]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -135.0
+offset_right = 280.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal_panel")
+
+[node name="Margin" type="MarginContainer" parent="Canvas/RebornModal" unique_id=2081918401]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="Canvas/RebornModal/Margin" unique_id=2081918402]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="Canvas/RebornModal/Margin/VBox" unique_id=2081918403]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.38, 0.38, 1)
+theme_override_font_sizes/font_size = 22
+text = "OH NOOOO... REBORN AGAIN :("
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Canvas/RebornModal/Margin/VBox" unique_id=2081918404]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.95, 0.95)
+theme_override_font_sizes/font_size = 14
+text = "You fell before reclaiming your present timeline.
+Do you wish to be reborn and try again?"
+horizontal_alignment = 1
+
+[node name="ButtonBox" type="HBoxContainer" parent="Canvas/RebornModal/Margin/VBox" unique_id=2081918405]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="YesButton" type="Button" parent="Canvas/RebornModal/Margin/VBox/ButtonBox" unique_id=2081918406]
+custom_minimum_size = Vector2(160, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 1, 0.65, 1)
+theme_override_colors/font_hover_color = Color(0.65, 1, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = " REBORN"
+
+[node name="NoButton" type="Button" parent="Canvas/RebornModal/Margin/VBox/ButtonBox" unique_id=2081918407]
+custom_minimum_size = Vector2(160, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.5, 1)
+theme_override_colors/font_hover_color = Color(1, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = " QUIT TO MENU"
+
+[node name="MainMenu" type="Control" parent="Canvas" unique_id=2081919000]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_mainmenu")
+
+[node name="Backdrop" type="ColorRect" parent="Canvas/MainMenu" unique_id=2081919001]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00741344, 0.028361455, 0.06266447, 0.92156863)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Canvas/MainMenu/Backdrop" unique_id=2139716830]
+amount = 120
+emission_shape = 1
+emission_sphere_radius = 1.0
+anim_speed_min = 20.0
+anim_speed_max = 20.2
+
+[node name="main menu music" type="AudioStreamPlayer" parent="." unique_id=1294194559]
+stream = ExtResource("9_ioo17")
+
+[node name="helLFIRE" type="AudioStreamPlayer" parent="." unique_id=1800513806]
+stream = ExtResource("10_hellfire")
+
+[node name="back to the present" type="AudioStreamPlayer" parent="." unique_id=249308352]
+stream = ExtResource("11_present")
+
+[node name="boss fight music" type="AudioStreamPlayer" parent="." unique_id=345746177]
+stream = ExtResource("12_k3n1d")

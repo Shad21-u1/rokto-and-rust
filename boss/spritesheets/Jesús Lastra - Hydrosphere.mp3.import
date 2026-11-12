@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://da3q082q3w854"
+path="res://.godot/imported/Jesús Lastra - Hydrosphere.mp3-ad0b3f3d8cbe0fc272f5b4531694b18e.mp3str"
+
+[deps]
+
+source_file="res://boss/spritesheets/Jesús Lastra - Hydrosphere.mp3"
+dest_files=["res://.godot/imported/Jesús Lastra - Hydrosphere.mp3-ad0b3f3d8cbe0fc272f5b4531694b18e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

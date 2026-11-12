@@ -1,0 +1,215 @@
+[gd_scene format=3 uid="uid://c6v2n9boss01"]
+
+[ext_resource type="Script" path="res://boss.gd" id="1_boss"]
+[ext_resource type="Texture2D" uid="uid://dwxxrf2ugek8x" path="res://boss/spritesheets/andromalius-57x88.png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk1"]
+atlas = ExtResource("2_tex")
+region = Rect2(57, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk2"]
+atlas = ExtResource("2_tex")
+region = Rect2(114, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk3"]
+atlas = ExtResource("2_tex")
+region = Rect2(171, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk4"]
+atlas = ExtResource("2_tex")
+region = Rect2(228, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk5"]
+atlas = ExtResource("2_tex")
+region = Rect2(285, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk6"]
+atlas = ExtResource("2_tex")
+region = Rect2(342, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atk7"]
+atlas = ExtResource("2_tex")
+region = Rect2(399, 176, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl1"]
+atlas = ExtResource("2_tex")
+region = Rect2(57, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl2"]
+atlas = ExtResource("2_tex")
+region = Rect2(114, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl3"]
+atlas = ExtResource("2_tex")
+region = Rect2(171, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl4"]
+atlas = ExtResource("2_tex")
+region = Rect2(228, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl5"]
+atlas = ExtResource("2_tex")
+region = Rect2(285, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl6"]
+atlas = ExtResource("2_tex")
+region = Rect2(342, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idl7"]
+atlas = ExtResource("2_tex")
+region = Rect2(399, 0, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov0"]
+atlas = ExtResource("2_tex")
+region = Rect2(0, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov1"]
+atlas = ExtResource("2_tex")
+region = Rect2(57, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov2"]
+atlas = ExtResource("2_tex")
+region = Rect2(114, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov3"]
+atlas = ExtResource("2_tex")
+region = Rect2(171, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov4"]
+atlas = ExtResource("2_tex")
+region = Rect2(228, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov5"]
+atlas = ExtResource("2_tex")
+region = Rect2(285, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov6"]
+atlas = ExtResource("2_tex")
+region = Rect2(342, 88, 57, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mov7"]
+atlas = ExtResource("2_tex")
+region = Rect2(399, 88, 57, 88)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk3")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_atk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atk7")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idl7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mov7")
+}],
+"loop": true,
+"name": &"move",
+"speed": 9.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boss"]
+radius = 16.0
+height = 62.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_atk"]
+radius = 32.0
+
+[node name="Boss" type="CharacterBody2D" groups=["boss"]]
+script = ExtResource("1_boss")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_boss")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_boss")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-22, 4)
+shape = SubResource("CircleShape2D_atk")

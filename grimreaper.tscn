@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://wha4nto8noqx"]
+
+[ext_resource type="Script" uid="uid://dkvd64atgy27a" path="res://grimreaper.gd" id="1_g6cg8"]
+[ext_resource type="Texture2D" uid="uid://cs0lvtxjl6x6h" path="res://black_death.png" id="1_jkerg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6cg8"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(0, 256, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2wss"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(96, 256, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6xen"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(192, 256, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxwf1"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(0, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56p7q"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(96, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vykq"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(192, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8ys0"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(0, 384, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spbo8"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(96, 384, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4paf"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(192, 384, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt85a"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(0, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl323"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(96, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17aq0"]
+atlas = ExtResource("1_jkerg")
+region = Rect2(192, 128, 96, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qma66"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6cg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2wss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6xen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxwf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56p7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vykq")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8ys0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spbo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4paf")
+}],
+"loop": 1,
+"name": &"move left",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt85a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl323")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17aq0")
+}],
+"loop": 1,
+"name": &"move right",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qma66"]
+height = 58.0
+
+[node name="Grimreaper" type="Node2D" unique_id=1969666614]
+script = ExtResource("1_g6cg8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240509540]
+scale = Vector2(0.55, 0.55)
+sprite_frames = SubResource("SpriteFrames_qma66")
+animation = &"move left"
+autoplay = "move left"
