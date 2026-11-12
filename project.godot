@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Rokto & Rust"
-run/main_scene="res://world.tscn"
+run/main_scene="res://scenes/levels/world.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-SettingsManager="*res://settings_manager.gd"
+SettingsManager="*res://scripts/core/settings_manager.gd"
 
 [display]
 

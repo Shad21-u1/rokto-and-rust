@@ -1,3 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Archived raw/unused jam assets
+_archive/
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.tmp

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csgh1j47eabb"
+path="res://.godot/imported/Jesús Lastra - Cries From Hell.mp3-16feb8e33082b11c3b98346a2bc88c32.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Jesús Lastra - Cries From Hell.mp3"
+dest_files=["res://.godot/imported/Jesús Lastra - Cries From Hell.mp3-16feb8e33082b11c3b98346a2bc88c32.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
