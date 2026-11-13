@@ -115,7 +115,7 @@ script = ExtResource("1_level2")
 
 [node name="CANVASSES" type="Node" parent="."]
 [node name="player" parent="SETUP" instance=ExtResource("2_player")]
-position = Vector2(-380, 0)
+position = Vector2(-380, 16)
 
 [node name="EYES" type="Camera2D" parent="SETUP"]
 position = Vector2(-380, -20)

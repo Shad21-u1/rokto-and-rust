@@ -1,0 +1,208 @@
+extends CharacterBody2D
+
+signal health_changed(current_hp, max_hp)
+signal boss_defeated
+
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var attack_area = $AttackArea
+
+const MAX_HEALTH = 400.0
+const SPEED = 110.0
+const DAMAGE = 22.0
+const ATTACK_RANGE = 75.0
+
+var current_health = MAX_HEALTH
+var target_player = null
+var is_dead = false
+var is_attacking = false
+var is_hurt = false
+var can_act = false
+var is_dormant = false
+var has_hit_this_attack = false
+var attack_timer = 0.0
+
+func _ready():
+	add_to_group("boss")
+	add_to_group("enemies")
+	current_health = MAX_HEALTH
+	collision_layer = 2
+	collision_mask = 1
+	if animated_sprite:
+		animated_sprite.animation_finished.connect(_on_animation_finished)
+		animated_sprite.frame_changed.connect(_on_frame_changed)
+	queue_redraw()
+
+func set_dormant(dormant: bool):
+	is_dormant = dormant
+	can_act = not dormant
+	visible = not dormant
+	if dormant:
+		collision_layer = 0
+		collision_mask = 0
+	else:
+		collision_layer = 2
+		collision_mask = 1
+	queue_redraw()
+
+func activate_as_final_boss(player_node):
+	set_dormant(false)
+	target_player = player_node
+	can_act = true
+	current_health = MAX_HEALTH
+	emit_signal("health_changed", current_health, MAX_HEALTH)
+	
+	# Dramatic awakening surge
+	var tween = create_tween()
+	modulate = Color(3.5, 0.4, 0.4, 1.0)
+	scale = Vector2(0.5, 1.6)
+	tween.parallel().tween_property(self, "modulate", Color(1, 1, 1, 1), 0.7)
+	tween.parallel().tween_property(self, "scale", Vector2(1, 1), 0.7).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+
+func activate_boss(player_node):
+	activate_as_final_boss(player_node)
+
+const GROUND_Y = -26.0
+
+func _physics_process(delta):
+	velocity.y = 0.0
+
+	if is_dead or is_dormant:
+		velocity = velocity.move_toward(Vector2.ZERO, 300.0 * delta)
+		move_and_slide()
+		position.y = GROUND_Y
+		return
+
+	if not can_act or not is_instance_valid(target_player):
+		velocity.x = move_toward(velocity.x, 0.0, 400.0 * delta)
+		move_and_slide()
+		position.y = GROUND_Y
+		return
+
+	if attack_timer > 0.0:
+		attack_timer -= delta
+
+	var dist_to_player = global_position.distance_to(target_player.global_position)
+	var dir_to_player = (target_player.global_position - global_position).normalized()
+
+	if dir_to_player.x < 0.0:
+		animated_sprite.flip_h = false
+		if attack_area:
+			attack_area.position.x = -22.0
+	else:
+		animated_sprite.flip_h = true
+		if attack_area:
+			attack_area.position.x = 22.0
+
+	if is_attacking:
+		if animated_sprite and animated_sprite.frame >= 2 and animated_sprite.frame <= 6 and not has_hit_this_attack:
+			check_melee_hit()
+		var lunge = 1.0 if animated_sprite.flip_h else -1.0
+		velocity.x = move_toward(velocity.x, lunge * 60.0, 250.0 * delta)
+		move_and_slide()
+		position.y = GROUND_Y
+		return
+
+	if is_hurt:
+		velocity.x = move_toward(velocity.x, 0.0, 500.0 * delta)
+		move_and_slide()
+		position.y = GROUND_Y
+		return
+
+	if dist_to_player <= ATTACK_RANGE and attack_timer <= 0.0:
+		start_attack()
+	elif dist_to_player > ATTACK_RANGE * 0.7:
+		velocity.x = move_toward(velocity.x, dir_to_player.x * SPEED, 700.0 * delta)
+		if animated_sprite.animation != "move":
+			animated_sprite.play("move")
+	else:
+		velocity.x = move_toward(velocity.x, 0.0, 600.0 * delta)
+		if animated_sprite.animation != "idle":
+			animated_sprite.play("idle")
+
+	move_and_slide()
+	position.y = GROUND_Y
+
+func start_attack():
+	is_attacking = true
+	has_hit_this_attack = false
+	attack_timer = 1.3
+	velocity.x = 0.0
+	animated_sprite.stop()
+	animated_sprite.play("attack")
+
+func _on_frame_changed():
+	if is_attacking and animated_sprite.animation == "attack" and (animated_sprite.frame == 3 or animated_sprite.frame == 4 or animated_sprite.frame == 5):
+		check_melee_hit()
+
+func check_melee_hit():
+	if not is_instance_valid(target_player) or is_dead or is_dormant or has_hit_this_attack:
+		return
+	var dist = global_position.distance_to(target_player.global_position)
+	var to_player_x = target_player.global_position.x - global_position.x
+	var is_facing_player = (to_player_x > 0.0 and animated_sprite.flip_h) or (to_player_x < 0.0 and not animated_sprite.flip_h)
+	if (is_facing_player or dist <= 40.0) and dist <= ATTACK_RANGE + 35.0:
+		has_hit_this_attack = true
+		if target_player.has_method("take_damage"):
+			target_player.take_damage(DAMAGE, global_position)
+
+func take_damage(amount):
+	if is_dead or is_dormant:
+		return
+
+	current_health = max(0.0, current_health - amount)
+	emit_signal("health_changed", current_health, MAX_HEALTH)
+	queue_redraw()
+
+	var tween = create_tween()
+	modulate = Color(2.5, 0.3, 0.3, 1.0)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.25)
+
+	if target_player:
+		var knock_dir = -1.0 if target_player.global_position.x > global_position.x else 1.0
+		velocity.x = knock_dir * 90.0
+
+	if current_health <= 0.0:
+		die()
+
+func die():
+	is_dead = true
+	can_act = false
+	velocity = Vector2.ZERO
+	collision_layer = 0
+	collision_mask = 0
+	emit_signal("boss_defeated")
+
+	var death_tween = create_tween()
+	death_tween.tween_property(self, "modulate:a", 0.0, 1.4)
+	death_tween.finished.connect(func(): queue_free())
+
+func _on_animation_finished():
+	if animated_sprite.animation == "attack":
+		is_attacking = false
+		has_hit_this_attack = false
+		animated_sprite.play("idle")
+
+func _draw():
+	if is_dead or is_dormant:
+		return
+	var shadow_pts = PackedVector2Array()
+	var shadow_y = 42.0
+	var rx = 18.0
+	var ry = 5.0
+	for i in range(16):
+		var angle = i * TAU / 16.0
+		shadow_pts.append(Vector2(cos(angle) * rx, shadow_y + sin(angle) * ry))
+	draw_colored_polygon(shadow_pts, Color(0.0, 0.0, 0.05, 0.4))
+
+	# Overhead Boss Health Bar
+	if can_act and current_health > 0.0:
+		var bar_w = 64.0
+		var bar_h = 5.0
+		var bar_y = -52.0
+		# Border & dark backdrop
+		draw_rect(Rect2(-bar_w / 2.0 - 1.0, bar_y - 1.0, bar_w + 2.0, bar_h + 2.0), Color(0.06, 0.04, 0.1, 0.9), true)
+		draw_rect(Rect2(-bar_w / 2.0 - 1.0, bar_y - 1.0, bar_w + 2.0, bar_h + 2.0), Color(0.4, 0.15, 0.25, 0.95), false, 1.0)
+		# Health fill
+		var pct = clamp(current_health / MAX_HEALTH, 0.0, 1.0)
+		if pct > 0.0:
+			draw_rect(Rect2(-bar_w / 2.0, bar_y, bar_w * pct, bar_h), Color(0.92, 0.18, 0.25, 1.0), true)

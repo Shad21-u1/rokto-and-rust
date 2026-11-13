@@ -80,7 +80,7 @@ func _ready():
 		ending_menu_btn.pressed.connect(_on_return_to_main_menu)
 
 	if player:
-		player.position = Vector2(-380.0, 0.0)
+		player.position = Vector2(-380.0, 16.0)
 		player.unlock_controls()
 		if player.has_signal("health_changed") and not player.health_changed.is_connected(_on_player_health_changed):
 			player.health_changed.connect(_on_player_health_changed)

@@ -80,7 +80,6 @@ func _ready():
 
 	visible = true
 	change_state(State.IDLE)
-	position.y = 0.0
 	emit_signal("health_changed", current_health, MAX_HEALTH)
 
 func _setup_particles():
@@ -121,7 +120,7 @@ func _physics_process(delta: float):
 	if controls_locked:
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 		_apply_gravity(delta)
-		if current_state != State.IDLE and position.y >= 0.0:
+		if current_state != State.IDLE and is_on_floor():
 			change_state(State.IDLE)
 		move_and_slide()
 		_clamp_ground()
@@ -141,13 +140,13 @@ func _physics_process(delta: float):
 			if dodge_timer <= 0.0:
 				is_dodging = false
 				is_invulnerable = false
-				if position.y >= 0.0:
+				if is_on_floor():
 					change_state(State.IDLE)
 				else:
 					change_state(State.JUMP)
 
 		State.ATTACK, State.MECH_ARM, State.PARRY:
-			if position.y >= 0.0:
+			if is_on_floor():
 				velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 			else:
 				velocity.x = move_toward(velocity.x, 0.0, AIR_ACCEL * 0.5 * delta)
@@ -155,7 +154,7 @@ func _physics_process(delta: float):
 			if attack_timer <= 0.0:
 				is_attacking = false
 				is_taunting = false
-				if position.y >= 0.0:
+				if is_on_floor():
 					change_state(State.IDLE)
 				else:
 					change_state(State.JUMP)
@@ -170,14 +169,13 @@ func _physics_process(delta: float):
 	_clamp_ground()
 
 func _apply_gravity(delta: float):
-	if position.y < 0.0 or not is_on_floor():
+	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 	elif velocity.y > 0.0:
 		velocity.y = 0.0
 
 func _clamp_ground():
-	if position.y >= 0.0:
-		position.y = 0.0
+	if is_on_floor():
 		if velocity.y > 0.0:
 			velocity.y = 0.0
 		if current_state == State.JUMP:
@@ -276,7 +274,7 @@ func can_act() -> bool:
 	return current_state in [State.IDLE, State.WALK, State.SPRINT, State.JUMP] and not controls_locked and not is_dead
 
 func can_jump() -> bool:
-	return (position.y >= 0.0 or is_on_floor() or current_state in [State.IDLE, State.WALK, State.SPRINT]) and not controls_locked and not is_dead
+	return (is_on_floor() or current_state in [State.IDLE, State.WALK, State.SPRINT]) and not controls_locked and not is_dead
 
 func can_attack() -> bool:
 	return current_state in [State.IDLE, State.WALK, State.SPRINT, State.JUMP] and not controls_locked and not is_dead
@@ -374,7 +372,7 @@ func _on_animation_finished():
 		is_attacking = false
 		is_dodging = false
 		is_taunting = false
-		if position.y >= 0.0:
+		if is_on_floor():
 			change_state(State.IDLE)
 		else:
 			change_state(State.JUMP)

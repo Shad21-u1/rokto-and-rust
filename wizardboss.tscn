@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://d0rvg1wwkiyv6"]
+
+[ext_resource type="Script" path="res://scripts/bosses/wizardboss.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dnkjucis0h8qy" path="res://assets/sprites/bosses/mage-3-87x110.png" id="1_5ym12"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anhmu"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(0, 0, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0ads"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(87, 0, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7l3a7"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(174, 0, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyndg"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(261, 0, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl8pq"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(0, 110, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uadm"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(87, 110, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4c3vv"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(174, 110, 87, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhw5k"]
+atlas = ExtResource("1_5ym12")
+region = Rect2(261, 110, 87, 110)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pf7j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl8pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uadm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4c3vv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhw5k")
+}],
+"loop": false,
+"name": &"cast",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anhmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0ads")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7l3a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyndg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qma66"]
+radius = 18.0
+height = 76.0
+
+[node name="Wizardbosslevel3" type="CharacterBody2D" groups=["boss", "enemies"]]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5pf7j")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_qma66")

@@ -256,7 +256,7 @@ func _ready():
 		get_node("/root/SettingsManager").apply_graphics_quality(get_node("/root/SettingsManager").graphics_quality, self)
 
 	if player:
-		player.position = Vector2(-400.0, 0.0)
+		player.position = Vector2(-400.0, 16.0)
 		if player.has_method("lock_controls"):
 			player.lock_controls()
 		if player.has_signal("health_changed") and not player.health_changed.is_connected(_on_player_health_changed):

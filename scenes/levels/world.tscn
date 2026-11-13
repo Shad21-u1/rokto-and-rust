@@ -162,7 +162,7 @@ script = ExtResource("1_world")
 
 [node name="CANVASSES" type="Node" parent="."]
 [node name="player" parent="SETUP" unique_id=2107892934 instance=ExtResource("2_player")]
-position = Vector2(-400, 0)
+position = Vector2(-400, 16)
 
 [node name="EYES" type="Camera2D" parent="SETUP" unique_id=335044772]
 position = Vector2(-360, -20)
