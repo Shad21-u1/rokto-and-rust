@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgf1k06q12lib"
-path="res://.godot/imported/RPG_Fantasy_Starter_Pack.png-f2a9971a1d6d8ae67d9c41ad3d96ea12.ctex"
+path="res://.godot/imported/RPG_Fantasy_Starter_Pack.png-8922945190094d058f84245d85f838f9.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tilemap/RPG_Fantasy_Starter_Pack.png"
-dest_files=["res://.godot/imported/RPG_Fantasy_Starter_Pack.png-f2a9971a1d6d8ae67d9c41ad3d96ea12.ctex"]
+dest_files=["res://.godot/imported/RPG_Fantasy_Starter_Pack.png-8922945190094d058f84245d85f838f9.ctex"]
 
 [params]
 

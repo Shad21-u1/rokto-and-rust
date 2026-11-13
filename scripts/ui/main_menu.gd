@@ -134,7 +134,7 @@ func _process(delta: float):
 
 	if is_loading:
 		loading_timer += delta
-		var p_ratio = clampf(loading_timer / 4.0, 0.0, 1.0)
+		var p_ratio = clampf(loading_timer / 0.5, 0.0, 1.0)
 		var curved_p = ease(p_ratio, -1.5) * 100.0
 		loading_progress = clampf(curved_p, 0.0, 100.0)
 
@@ -143,7 +143,7 @@ func _process(delta: float):
 		if loading_percent_label:
 			loading_percent_label.text = str(int(loading_progress)) + " %"
 
-		loading_dots_timer += delta * 4.2
+		loading_dots_timer += delta * 6.0
 		var dot_count = (int(loading_dots_timer) % 4) + 1
 		var dots = ""
 		for i in range(dot_count):
@@ -151,7 +151,7 @@ func _process(delta: float):
 		if loading_subtitle:
 			loading_subtitle.text = "SYNCHRONIZING TIMELINE" + dots
 
-		if loading_progress >= 100.0 and loading_timer >= 4.1:
+		if loading_progress >= 100.0 and loading_timer >= 0.5:
 			finish_loading_sequence()
 		return
 
@@ -707,10 +707,11 @@ func finish_loading_sequence():
 
 	var out_tween = create_tween()
 	if loading_container:
-		out_tween.tween_property(loading_container, "modulate:a", 0.0, 0.35)
+		out_tween.tween_property(loading_container, "modulate:a", 0.0, 0.2)
 	out_tween.finished.connect(func():
 		if loading_container:
 			loading_container.visible = false
+		visible = false
 		emit_signal("play_game")
 		if loading_callback.is_valid():
 			loading_callback.call()
@@ -1036,9 +1037,10 @@ func build_char_select_view():
 	right_vbox.add_child(moves_vbox)
 
 	moves_vbox.add_child(create_move_card("VOID BLADE SLICE", "[ LMB / J ]", "Quick sword strike. 35 DMG.", Color(1.0, 0.4, 0.4, 1.0)))
-	moves_vbox.add_child(create_move_card("MECH ARM OVERDRIVE", "[ T / K ]", "Ground slam shockwave. 55 DMG, knocks enemies back.", Color(0.3, 0.9, 1.0, 1.0)))
-	moves_vbox.add_child(create_move_card("SHADOW PHASE DODGE", "[ M / C / SHIFT ]", "Invulnerable roll dodge.", Color(0.9, 0.8, 0.3, 1.0)))
-	moves_vbox.add_child(create_move_card("TACTICAL SPRINT", "[ SHIFT + A/D ]", "Sprint across the battlefield.", Color(0.8, 0.6, 0.95, 1.0)))
+	moves_vbox.add_child(create_move_card("SHIELD PARRY", "[ RMB / E ]", "Raises shield to block and parry incoming attacks.", Color(0.9, 0.7, 0.3, 1.0)))
+	moves_vbox.add_child(create_move_card("ACROBATIC JUMP", "[ SPACE ]", "Airborne jump with full air maneuvering.", Color(0.3, 0.85, 1.0, 1.0)))
+	moves_vbox.add_child(create_move_card("SHADOW PHASE DASH", "[ SHIFT / M / C ]", "Invulnerable dash through enemy attacks.", Color(0.85, 0.55, 1.0, 1.0)))
+	moves_vbox.add_child(create_move_card("MECH ARM OVERDRIVE", "[ T / K ]", "Ground slam shockwave. 55 DMG AOE.", Color(0.3, 0.9, 1.0, 1.0)))
 
 	# Bottom Action Buttons
 	var action_hbox = HBoxContainer.new()

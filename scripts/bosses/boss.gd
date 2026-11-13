@@ -151,6 +151,7 @@ func take_damage(amount):
 
 	current_health = max(0.0, current_health - amount)
 	emit_signal("health_changed", current_health, MAX_HEALTH)
+	queue_redraw()
 
 	var tween = create_tween()
 	modulate = Color(2.5, 0.3, 0.3, 1.0)
@@ -192,3 +193,16 @@ func _draw():
 		var angle = i * TAU / 16.0
 		shadow_pts.append(Vector2(cos(angle) * rx, shadow_y + sin(angle) * ry))
 	draw_colored_polygon(shadow_pts, Color(0.0, 0.0, 0.05, 0.4))
+
+	# Overhead Boss Health Bar
+	if can_act and current_health > 0.0:
+		var bar_w = 64.0
+		var bar_h = 5.0
+		var bar_y = -52.0
+		# Border & dark backdrop
+		draw_rect(Rect2(-bar_w / 2.0 - 1.0, bar_y - 1.0, bar_w + 2.0, bar_h + 2.0), Color(0.06, 0.04, 0.1, 0.9), true)
+		draw_rect(Rect2(-bar_w / 2.0 - 1.0, bar_y - 1.0, bar_w + 2.0, bar_h + 2.0), Color(0.4, 0.15, 0.25, 0.95), false, 1.0)
+		# Health fill
+		var pct = clamp(current_health / MAX_HEALTH, 0.0, 1.0)
+		if pct > 0.0:
+			draw_rect(Rect2(-bar_w / 2.0, bar_y, bar_w * pct, bar_h), Color(0.92, 0.18, 0.25, 1.0), true)

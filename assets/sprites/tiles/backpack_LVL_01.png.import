@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0dpafvl7iwy5"
-path="res://.godot/imported/backpack_LVL_01.png-8b2d8beeebfbafc0cbbe325fc388a5d5.ctex"
+path="res://.godot/imported/backpack_LVL_01.png-be060a2892da51a14127d6b00aba072b.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/backpack_LVL_01.png"
-dest_files=["res://.godot/imported/backpack_LVL_01.png-8b2d8beeebfbafc0cbbe325fc388a5d5.ctex"]
+dest_files=["res://.godot/imported/backpack_LVL_01.png-be060a2892da51a14127d6b00aba072b.ctex"]
 
 [params]
 

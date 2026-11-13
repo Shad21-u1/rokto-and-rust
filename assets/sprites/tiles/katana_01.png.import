@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bm8rn7ry2qb5i"
-path="res://.godot/imported/katana_01.png-05ca3524e0a56f9dac4620d72a866f66.ctex"
+path="res://.godot/imported/katana_01.png-5de02b3edbcfffae477087c937ff39ac.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/katana_01.png"
-dest_files=["res://.godot/imported/katana_01.png-05ca3524e0a56f9dac4620d72a866f66.ctex"]
+dest_files=["res://.godot/imported/katana_01.png-5de02b3edbcfffae477087c937ff39ac.ctex"]
 
 [params]
 

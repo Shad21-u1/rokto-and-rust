@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://biy78oip7xent"
-path="res://.godot/imported/bow_loaded_01.png-26c4a56e0343ae5c6a79c7f579d8f91e.ctex"
+path="res://.godot/imported/bow_loaded_01.png-1167f8fdb5a586f044466b566a91faa3.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/bow_loaded_01.png"
-dest_files=["res://.godot/imported/bow_loaded_01.png-26c4a56e0343ae5c6a79c7f579d8f91e.ctex"]
+dest_files=["res://.godot/imported/bow_loaded_01.png-1167f8fdb5a586f044466b566a91faa3.ctex"]
 
 [params]
 

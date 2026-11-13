@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2rr4t3wbkoti"
-path="res://.godot/imported/axe_wood_splitting_01.png-c2aa76b2c71beb5df76aff7d06d8b458.ctex"
+path="res://.godot/imported/axe_wood_splitting_01.png-ce3134ba0758b7437547fa4075d8aeed.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/axe_wood_splitting_01.png"
-dest_files=["res://.godot/imported/axe_wood_splitting_01.png-c2aa76b2c71beb5df76aff7d06d8b458.ctex"]
+dest_files=["res://.godot/imported/axe_wood_splitting_01.png-ce3134ba0758b7437547fa4075d8aeed.ctex"]
 
 [params]
 

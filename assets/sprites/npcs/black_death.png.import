@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cs0lvtxjl6x6h"
-path="res://.godot/imported/black_death.png-649aeb5d365dc5332d0373f8f6e156e6.ctex"
+path="res://.godot/imported/black_death.png-bc9777d06746dd39e5174f2b2718bba0.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/npcs/black_death.png"
-dest_files=["res://.godot/imported/black_death.png-649aeb5d365dc5332d0373f8f6e156e6.ctex"]
+dest_files=["res://.godot/imported/black_death.png-bc9777d06746dd39e5174f2b2718bba0.ctex"]
 
 [params]
 

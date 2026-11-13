@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtgtckbnhvkk0"
-path="res://.godot/imported/onion_yellow_01.png-55a6087ac9601f0b4fab1505c26477b2.ctex"
+path="res://.godot/imported/onion_yellow_01.png-10a00382e35317407d1c6944bc56c87a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/onion_yellow_01.png"
-dest_files=["res://.godot/imported/onion_yellow_01.png-55a6087ac9601f0b4fab1505c26477b2.ctex"]
+dest_files=["res://.godot/imported/onion_yellow_01.png-10a00382e35317407d1c6944bc56c87a.ctex"]
 
 [params]
 

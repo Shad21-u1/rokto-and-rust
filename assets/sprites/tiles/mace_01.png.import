@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c16yhnsb56s7q"
-path="res://.godot/imported/mace_01.png-5e980d11998c3e35fe7acfb0584a01f8.ctex"
+path="res://.godot/imported/mace_01.png-585b3453518cdbdd7f68209be89a3b32.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/mace_01.png"
-dest_files=["res://.godot/imported/mace_01.png-5e980d11998c3e35fe7acfb0584a01f8.ctex"]
+dest_files=["res://.godot/imported/mace_01.png-585b3453518cdbdd7f68209be89a3b32.ctex"]
 
 [params]
 

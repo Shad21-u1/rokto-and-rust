@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpyljdxlbwxyq"
-path="res://.godot/imported/blueberries_01.png-40942b56b80e26d601641ee01d651cf1.ctex"
+path="res://.godot/imported/blueberries_01.png-6b64cbe658074a1a0a029a106ac19850.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/blueberries_01.png"
-dest_files=["res://.godot/imported/blueberries_01.png-40942b56b80e26d601641ee01d651cf1.ctex"]
+dest_files=["res://.godot/imported/blueberries_01.png-6b64cbe658074a1a0a029a106ac19850.ctex"]
 
 [params]
 

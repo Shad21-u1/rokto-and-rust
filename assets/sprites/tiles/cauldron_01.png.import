@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt8vrvnbnanh"
-path="res://.godot/imported/cauldron_01.png-469aeddd18a4b1c17b8bc1f98738bbb1.ctex"
+path="res://.godot/imported/cauldron_01.png-10d057088927b7ceec9dac536aa3a85d.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/cauldron_01.png"
-dest_files=["res://.godot/imported/cauldron_01.png-469aeddd18a4b1c17b8bc1f98738bbb1.ctex"]
+dest_files=["res://.godot/imported/cauldron_01.png-10d057088927b7ceec9dac536aa3a85d.ctex"]
 
 [params]
 

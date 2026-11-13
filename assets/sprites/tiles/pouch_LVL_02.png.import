@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bljpv3yppu350"
-path="res://.godot/imported/pouch_LVL_02.png-997c38453f75b3ef5a47946f8f15c669.ctex"
+path="res://.godot/imported/pouch_LVL_02.png-c4faaf429fe867cf3d367ca655615153.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/pouch_LVL_02.png"
-dest_files=["res://.godot/imported/pouch_LVL_02.png-997c38453f75b3ef5a47946f8f15c669.ctex"]
+dest_files=["res://.godot/imported/pouch_LVL_02.png-c4faaf429fe867cf3d367ca655615153.ctex"]
 
 [params]
 

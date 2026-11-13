@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c373kdxll8pcb"
-path="res://.godot/imported/tanto_01.png-f740df13c6132bb0da121154f3a8e006.ctex"
+path="res://.godot/imported/tanto_01.png-5c049d58e34cff179668fb06d903e487.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/tanto_01.png"
-dest_files=["res://.godot/imported/tanto_01.png-f740df13c6132bb0da121154f3a8e006.ctex"]
+dest_files=["res://.godot/imported/tanto_01.png-5c049d58e34cff179668fb06d903e487.ctex"]
 
 [params]
 

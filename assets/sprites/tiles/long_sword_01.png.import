@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxrwqa6gf2c0j"
-path="res://.godot/imported/long_sword_01.png-d6c94d2f5635c7441f1a4ba3ef096430.ctex"
+path="res://.godot/imported/long_sword_01.png-9ea9519f6a8f10239730b671cbdc5815.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/long_sword_01.png"
-dest_files=["res://.godot/imported/long_sword_01.png-d6c94d2f5635c7441f1a4ba3ef096430.ctex"]
+dest_files=["res://.godot/imported/long_sword_01.png-9ea9519f6a8f10239730b671cbdc5815.ctex"]
 
 [params]
 

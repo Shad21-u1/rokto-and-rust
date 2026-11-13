@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bj71mm1kqh3v4"
-path="res://.godot/imported/stew_beef_01.png-6d76f9402a975cbb02f6ca33e87135ec.ctex"
+path="res://.godot/imported/stew_beef_01.png-0db52a236a688af7c0c8308700d4d334.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/stew_beef_01.png"
-dest_files=["res://.godot/imported/stew_beef_01.png-6d76f9402a975cbb02f6ca33e87135ec.ctex"]
+dest_files=["res://.godot/imported/stew_beef_01.png-0db52a236a688af7c0c8308700d4d334.ctex"]
 
 [params]
 

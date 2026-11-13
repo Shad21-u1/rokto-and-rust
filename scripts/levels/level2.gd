@@ -1,38 +1,42 @@
 extends Node2D
 
-@onready var player = get_node_or_null("player")
-@onready var grue = get_node_or_null("GRUE")
-@onready var darksaber = get_node_or_null("DARKSABER")
-@onready var camera = get_node_or_null("EYES")
+@onready var player = get_node_or_null("SETUP/player")
+@onready var grue = get_node_or_null("ENVIRONMENT/GRUE")
+@onready var darksaber = get_node_or_null("ENVIRONMENT/DARKSABER")
+@onready var camera = get_node_or_null("SETUP/EYES")
 
-@onready var bg_back = get_node_or_null("SCENARIO/BackTrees")
-@onready var bg_mid = get_node_or_null("SCENARIO/MidTrees")
-@onready var bg_front = get_node_or_null("SCENARIO/FrontTrees")
-@onready var bg_lights = get_node_or_null("SCENARIO/ForestLights")
+@onready var bg_back = get_node_or_null("ENVIRONMENT/SCENARIO/BackTrees")
+@onready var bg_mid = get_node_or_null("ENVIRONMENT/SCENARIO/MidTrees")
+@onready var bg_front = get_node_or_null("ENVIRONMENT/SCENARIO/FrontTrees")
+@onready var bg_lights = get_node_or_null("ENVIRONMENT/SCENARIO/ForestLights")
 
-@onready var canvas = get_node_or_null("Canvas")
-@onready var dialogue_box = get_node_or_null("Canvas/Dialogues")
-@onready var speaker_label = get_node_or_null("Canvas/Dialogues/outeredgeline/BOX/SPEAKER")
-@onready var dialogue_label = get_node_or_null("Canvas/Dialogues/outeredgeline/BOX/DIALOGUES TEXT")
-@onready var prompt_label = get_node_or_null("Canvas/Dialogues/outeredgeline/BOX/SKIP BUTTON")
+@onready var canvas = get_node_or_null("CANVASSES/Canvas")
+@onready var dialogue_box = get_node_or_null("CANVASSES/Canvas/Dialogues")
+@onready var speaker_label = get_node_or_null("CANVASSES/Canvas/Dialogues/outeredgeline/BOX/SPEAKER")
+@onready var dialogue_label = get_node_or_null("CANVASSES/Canvas/Dialogues/outeredgeline/BOX/DIALOGUES TEXT")
+@onready var prompt_label = get_node_or_null("CANVASSES/Canvas/Dialogues/outeredgeline/BOX/SKIP BUTTON")
 
-@onready var hud = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE")
-@onready var player_hp_bar = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/HEALTH/HEALTHBar")
-@onready var player_hp_text = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/HEALTH/TEXT")
-@onready var boss_vbox = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH")
-@onready var boss_label = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BossLabel")
-@onready var boss_hp_bar = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BOSSHEALTH")
-@onready var status_banner = get_node_or_null("Canvas/status")
+@onready var hud = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE")
+@onready var player_hp_bar = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/HEALTH/HEALTHBar")
+@onready var player_hp_text = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/HEALTH/TEXT")
+@onready var boss_vbox = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH")
+@onready var boss_label = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BossLabel")
+@onready var boss_hp_bar = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BOSSHEALTH")
+@onready var status_banner = get_node_or_null("CANVASSES/Canvas/status")
 
-@onready var ending_screen = get_node_or_null("Canvas/EndingScreen")
-@onready var ending_title = get_node_or_null("Canvas/EndingScreen/Center/VBox/Title")
-@onready var ending_subtitle = get_node_or_null("Canvas/EndingScreen/Center/VBox/Subtitle")
-@onready var ending_hint = get_node_or_null("Canvas/EndingScreen/Center/VBox/Hint")
-@onready var ending_menu_btn = get_node_or_null("Canvas/EndingScreen/Center/VBox/MenuButton")
+var heart_icons: Array = []
+var heart_full_tex: Texture2D = null
+var heart_empty_tex: Texture2D = null
+
+@onready var ending_screen = get_node_or_null("CANVASSES/Canvas/EndingScreen")
+@onready var ending_title = get_node_or_null("CANVASSES/Canvas/EndingScreen/Center/VBox/Title")
+@onready var ending_subtitle = get_node_or_null("CANVASSES/Canvas/EndingScreen/Center/VBox/Subtitle")
+@onready var ending_hint = get_node_or_null("CANVASSES/Canvas/EndingScreen/Center/VBox/Hint")
+@onready var ending_menu_btn = get_node_or_null("CANVASSES/Canvas/EndingScreen/Center/VBox/MenuButton")
 
 # Audio Background Music Nodes
-@onready var present_music = get_node_or_null("back to the present")
-@onready var boss_fight_music = get_node_or_null("boss fight music")
+@onready var present_music = get_node_or_null("MANAGERS/back to the present")
+@onready var boss_fight_music = get_node_or_null("MANAGERS/boss fight music")
 
 var music_blend_tween: Tween = null
 
@@ -114,8 +118,9 @@ func _ready():
 		dialogue_box.visible = false
 		dialogue_box.gui_input.connect(_on_dialogue_gui_input)
 
+	_setup_heart_hud()
 	if player_hp_text:
-		player_hp_text.text = "NABAB AKA N'  |  HP: 8 / 8"
+		player_hp_text.text = "NABAB AKA N'"
 
 	if present_music == null:
 		present_music = get_node_or_null("back to the present")
@@ -420,11 +425,53 @@ func finish_custom_dialogue():
 		if custom_dialogue_callback.is_valid():
 			custom_dialogue_callback.call()
 
-func _on_player_health_changed(hp, max_hp):
-	if player_hp_bar:
-		player_hp_bar.value = (hp / max_hp) * 100.0
+func _setup_heart_hud():
+	heart_full_tex = load("res://assets/sprites/ui/heart_full.png")
+	heart_empty_tex = load("res://assets/sprites/ui/heart_empty.png")
+	
+	var health_container = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/HEALTH")
+	if health_container == null:
+		health_container = find_child("HEALTH", true, false)
+	
+	if health_container:
+		var old_bar = health_container.get_node_or_null("HEALTHBar")
+		if old_bar:
+			old_bar.visible = false
+		
+		var h_box = health_container.get_node_or_null("HeartContainer")
+		if h_box == null:
+			h_box = HBoxContainer.new()
+			h_box.name = "HeartContainer"
+			h_box.add_theme_constant_override("separation", 6)
+			health_container.add_child(h_box)
+			
+			for i in range(5):
+				var h_rect = TextureRect.new()
+				h_rect.name = "Heart_%d" % i
+				h_rect.custom_minimum_size = Vector2(28, 28)
+				h_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				h_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				h_rect.texture = heart_full_tex
+				h_box.add_child(h_rect)
+		
+		heart_icons.clear()
+		for child in h_box.get_children():
+			if child is TextureRect:
+				heart_icons.append(child)
+
+func _update_heart_hud(current_hp: float):
+	if heart_icons.is_empty():
+		_setup_heart_hud()
+	for i in range(heart_icons.size()):
+		if i < int(round(current_hp)):
+			heart_icons[i].texture = heart_full_tex
+		else:
+			heart_icons[i].texture = heart_empty_tex
+
+func _on_player_health_changed(hp, _max_hp):
+	_update_heart_hud(hp)
 	if player_hp_text:
-		player_hp_text.text = "NABAB AKA N'  |  HP: %d / 8" % [int(hp)]
+		player_hp_text.text = "NABAB AKA N'"
 
 func _on_boss_health_changed(hp, max_hp):
 	if boss_hp_bar:

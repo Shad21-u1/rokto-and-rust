@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2nduenowpqny"
-path="res://.godot/imported/pickaxe_01.png-466905bc570a4e837055bd221cf55483.ctex"
+path="res://.godot/imported/pickaxe_01.png-e63fdfe6730d6e4d1d91d56bf124a862.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/pickaxe_01.png"
-dest_files=["res://.godot/imported/pickaxe_01.png-466905bc570a4e837055bd221cf55483.ctex"]
+dest_files=["res://.godot/imported/pickaxe_01.png-e63fdfe6730d6e4d1d91d56bf124a862.ctex"]
 
 [params]
 

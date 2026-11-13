@@ -107,10 +107,32 @@ expand_margin_bottom = 4.0
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_level2")
 
-[node name="SCENARIO" type="CanvasLayer" parent="."]
+[node name="SETUP" type="Node2D" parent="."]
+
+[node name="MANAGERS" type="Node" parent="."]
+
+[node name="ENVIRONMENT" type="Node2D" parent="."]
+
+[node name="CANVASSES" type="Node" parent="."]
+[node name="player" parent="SETUP" instance=ExtResource("2_player")]
+position = Vector2(-380, 0)
+
+[node name="EYES" type="Camera2D" parent="SETUP"]
+position = Vector2(-380, -20)
+zoom = Vector2(3.2, 3.2)
+position_smoothing_enabled = true
+
+[node name="back to the present" type="AudioStreamPlayer" parent="MANAGERS" unique_id=249308352]
+stream = ExtResource("11_present")
+bus = &"Master"
+
+[node name="boss fight music" type="AudioStreamPlayer" parent="MANAGERS" unique_id=987654322]
+stream = ExtResource("12_bossfight")
+bus = &"Master"
+[node name="SCENARIO" type="CanvasLayer" parent="ENVIRONMENT"]
 layer = -100
 
-[node name="ForestSkyBackdrop" type="TextureRect" parent="SCENARIO"]
+[node name="ForestSkyBackdrop" type="TextureRect" parent="ENVIRONMENT/SCENARIO"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -119,7 +141,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_forest_sky")
 expand_mode = 1
 
-[node name="BackTrees" type="TextureRect" parent="SCENARIO"]
+[node name="BackTrees" type="TextureRect" parent="ENVIRONMENT/SCENARIO"]
 texture_repeat = 2
 offset_right = 1632.0
 offset_bottom = 160.0
@@ -128,7 +150,7 @@ texture = ExtResource("5_back")
 stretch_mode = 1
 modulate = Color(0.72, 0.85, 0.82, 0.95)
 
-[node name="MidTrees" type="TextureRect" parent="SCENARIO"]
+[node name="MidTrees" type="TextureRect" parent="ENVIRONMENT/SCENARIO"]
 texture_repeat = 2
 offset_right = 1632.0
 offset_bottom = 160.0
@@ -137,7 +159,7 @@ texture = ExtResource("6_mid")
 stretch_mode = 1
 modulate = Color(0.85, 0.98, 0.92, 0.95)
 
-[node name="ForestLights" type="TextureRect" parent="SCENARIO"]
+[node name="ForestLights" type="TextureRect" parent="ENVIRONMENT/SCENARIO"]
 texture_repeat = 2
 offset_right = 1632.0
 offset_bottom = 160.0
@@ -146,7 +168,7 @@ texture = ExtResource("8_lights")
 stretch_mode = 1
 modulate = Color(1.15, 1.35, 0.95, 0.45)
 
-[node name="FrontTrees" type="TextureRect" parent="SCENARIO"]
+[node name="FrontTrees" type="TextureRect" parent="ENVIRONMENT/SCENARIO"]
 texture_repeat = 2
 offset_right = 1632.0
 offset_bottom = 160.0
@@ -154,7 +176,7 @@ scale = Vector2(6.75, 6.75)
 texture = ExtResource("7_front")
 stretch_mode = 1
 
-[node name="WindSpores" type="CPUParticles2D" parent="SCENARIO"]
+[node name="WindSpores" type="CPUParticles2D" parent="ENVIRONMENT/SCENARIO"]
 position = Vector2(960, 540)
 amount = 45
 lifetime = 6.0
@@ -173,7 +195,7 @@ scale_amount_max = 4.5
 scale_amount_curve = SubResource("Curve_spores_scale")
 color_ramp = SubResource("Gradient_spores")
 
-[node name="WindLeaves" type="CPUParticles2D" parent="SCENARIO"]
+[node name="WindLeaves" type="CPUParticles2D" parent="ENVIRONMENT/SCENARIO"]
 position = Vector2(1920, 300)
 amount = 24
 lifetime = 5.0
@@ -192,7 +214,7 @@ scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_leaves_scale")
 color_ramp = SubResource("Gradient_leaves")
 
-[node name="ForestVignette" type="TextureRect" parent="SCENARIO"]
+[node name="ForestVignette" type="TextureRect" parent="ENVIRONMENT/SCENARIO"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -202,44 +224,36 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_forest_vignette")
 expand_mode = 1
 
-[node name="GroundTiles" type="StaticBody2D" parent="."]
+[node name="GroundTiles" type="StaticBody2D" parent="ENVIRONMENT"]
 position = Vector2(0, 16)
 collision_layer = 1
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTiles"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ENVIRONMENT/GroundTiles"]
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_ground")
 
-[node name="EarthBody" type="Polygon2D" parent="GroundTiles"]
+[node name="EarthBody" type="Polygon2D" parent="ENVIRONMENT/GroundTiles"]
 color = Color(0.06, 0.08, 0.06, 1)
 polygon = PackedVector2Array(-25000, 0, 35000, 0, 35000, 600, -25000, 600)
 
-[node name="GrassRim" type="Polygon2D" parent="GroundTiles"]
+[node name="GrassRim" type="Polygon2D" parent="ENVIRONMENT/GroundTiles"]
 color = Color(0.24, 0.65, 0.32, 1)
 polygon = PackedVector2Array(-25000, 0, 35000, 0, 35000, 3, -25000, 3)
 
-[node name="MossUnderlayer" type="Polygon2D" parent="GroundTiles"]
+[node name="MossUnderlayer" type="Polygon2D" parent="ENVIRONMENT/GroundTiles"]
 color = Color(0.12, 0.35, 0.18, 0.85)
 polygon = PackedVector2Array(-25000, 3, 35000, 3, 35000, 10, -25000, 10)
 
-[node name="player" parent="." instance=ExtResource("2_player")]
-position = Vector2(-380, 0)
-
-[node name="GRUE" parent="." instance=ExtResource("3_grue")]
+[node name="GRUE" parent="ENVIRONMENT" instance=ExtResource("3_grue")]
 position = Vector2(160, -18)
 
-[node name="DARKSABER" parent="." instance=ExtResource("4_darksaber")]
+[node name="DARKSABER" parent="ENVIRONMENT" instance=ExtResource("4_darksaber")]
 position = Vector2(850, -34)
 
-[node name="EYES" type="Camera2D" parent="."]
-position = Vector2(-380, -20)
-zoom = Vector2(3.2, 3.2)
-position_smoothing_enabled = true
+[node name="Canvas" type="CanvasLayer" parent="CANVASSES"]
 
-[node name="Canvas" type="CanvasLayer" parent="."]
-
-[node name="CinematicBLACKEDGEBars" type="Control" parent="Canvas"]
+[node name="CinematicBLACKEDGEBars" type="Control" parent="CANVASSES/Canvas"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,7 +262,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TopBar" type="ColorRect" parent="Canvas/CinematicBLACKEDGEBars"]
+[node name="TopBar" type="ColorRect" parent="CANVASSES/Canvas/CinematicBLACKEDGEBars"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -256,7 +270,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
-[node name="BottomBar" type="ColorRect" parent="Canvas/CinematicBLACKEDGEBars"]
+[node name="BottomBar" type="ColorRect" parent="CANVASSES/Canvas/CinematicBLACKEDGEBars"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -267,7 +281,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 1)
 
-[node name="Dialogues" type="PanelContainer" parent="Canvas"]
+[node name="Dialogues" type="PanelContainer" parent="CANVASSES/Canvas"]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
@@ -282,25 +296,25 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
 
-[node name="outeredgeline" type="MarginContainer" parent="Canvas/Dialogues"]
+[node name="outeredgeline" type="MarginContainer" parent="CANVASSES/Canvas/Dialogues"]
 layout_mode = 2
 theme_override_constants/margin_left = 26
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 26
 theme_override_constants/margin_bottom = 16
 
-[node name="BOX" type="VBoxContainer" parent="Canvas/Dialogues/outeredgeline"]
+[node name="BOX" type="VBoxContainer" parent="CANVASSES/Canvas/Dialogues/outeredgeline"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="SPEAKER" type="Label" parent="Canvas/Dialogues/outeredgeline/BOX"]
+[node name="SPEAKER" type="Label" parent="CANVASSES/Canvas/Dialogues/outeredgeline/BOX"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 1.0, 0.7, 1)
 theme_override_font_sizes/font_size = 19
 text = "GRUE"
 
-[node name="DIALOGUES TEXT" type="RichTextLabel" parent="Canvas/Dialogues/outeredgeline/BOX"]
+[node name="DIALOGUES TEXT" type="RichTextLabel" parent="CANVASSES/Canvas/Dialogues/outeredgeline/BOX"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.92, 0.98, 0.94, 1)
@@ -309,14 +323,14 @@ bbcode_enabled = true
 text = "..."
 scroll_active = false
 
-[node name="SKIP BUTTON" type="Label" parent="Canvas/Dialogues/outeredgeline/BOX"]
+[node name="SKIP BUTTON" type="Label" parent="CANVASSES/Canvas/Dialogues/outeredgeline/BOX"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.85, 0.72, 0.9)
 theme_override_font_sizes/font_size = 13
 text = "SPACE/CLICK"
 horizontal_alignment = 2
 
-[node name="HUDSYSTEMPROTOTYPE" type="Control" parent="Canvas"]
+[node name="HUDSYSTEMPROTOTYPE" type="Control" parent="CANVASSES/Canvas"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -325,7 +339,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HEALTH" type="HBoxContainer" parent="Canvas/HUDSYSTEMPROTOTYPE"]
+[node name="HEALTH" type="HBoxContainer" parent="CANVASSES/Canvas/HUDSYSTEMPROTOTYPE"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 24.0
@@ -333,13 +347,13 @@ offset_right = 410.0
 offset_bottom = 54.0
 theme_override_constants/separation = 10
 
-[node name="TEXT" type="Label" parent="Canvas/HUDSYSTEMPROTOTYPE/HEALTH"]
+[node name="TEXT" type="Label" parent="CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/HEALTH"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.28, 0.98, 0.58, 1)
 theme_override_font_sizes/font_size = 15
 text = "NABAB AKA N'  |  HP: 8 / 8"
 
-[node name="HEALTHBar" type="ProgressBar" parent="Canvas/HUDSYSTEMPROTOTYPE/HEALTH"]
+[node name="HEALTHBar" type="ProgressBar" parent="CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/HEALTH"]
 custom_minimum_size = Vector2(340, 22)
 layout_mode = 2
 size_flags_vertical = 4
@@ -348,7 +362,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_player_fill")
 value = 100.0
 show_percentage = false
 
-[node name="BOSSHEALTH" type="VBoxContainer" parent="Canvas/HUDSYSTEMPROTOTYPE"]
+[node name="BOSSHEALTH" type="VBoxContainer" parent="CANVASSES/Canvas/HUDSYSTEMPROTOTYPE"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 5
@@ -361,14 +375,14 @@ offset_bottom = 54.0
 grow_horizontal = 2
 theme_override_constants/separation = 4
 
-[node name="BossLabel" type="Label" parent="Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH"]
+[node name="BossLabel" type="Label" parent="CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1.0, 0.45, 0.55, 1)
 theme_override_font_sizes/font_size = 13
 text = "DARKSABER - THE VOID ENFORCER"
 horizontal_alignment = 1
 
-[node name="BOSSHEALTH" type="ProgressBar" parent="Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH"]
+[node name="BOSSHEALTH" type="ProgressBar" parent="CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH"]
 custom_minimum_size = Vector2(520, 14)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_simple_bg")
@@ -376,7 +390,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_boss_fill")
 value = 100.0
 show_percentage = false
 
-[node name="status" type="Label" parent="Canvas"]
+[node name="status" type="Label" parent="CANVASSES/Canvas"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -397,7 +411,7 @@ theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EndingScreen" type="Control" parent="Canvas"]
+[node name="EndingScreen" type="Control" parent="CANVASSES/Canvas"]
 process_mode = 3
 visible = false
 modulate = Color(1, 1, 1, 0)
@@ -408,7 +422,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DarkOverlay" type="ColorRect" parent="Canvas/EndingScreen"]
+[node name="DarkOverlay" type="ColorRect" parent="CANVASSES/Canvas/EndingScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -417,7 +431,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.02, 0.04, 0.03, 0.96)
 
-[node name="Center" type="CenterContainer" parent="Canvas/EndingScreen"]
+[node name="Center" type="CenterContainer" parent="CANVASSES/Canvas/EndingScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -425,12 +439,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Canvas/EndingScreen/Center"]
+[node name="VBox" type="VBoxContainer" parent="CANVASSES/Canvas/EndingScreen/Center"]
 layout_mode = 2
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="Title" type="Label" parent="Canvas/EndingScreen/Center/VBox"]
+[node name="Title" type="Label" parent="CANVASSES/Canvas/EndingScreen/Center/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.35, 1)
 theme_override_colors/font_shadow_color = Color(0.08, 0.45, 0.25, 0.9)
@@ -440,7 +454,7 @@ theme_override_font_sizes/font_size = 46
 text = "THE TALE WILL CONTINUE ...."
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Canvas/EndingScreen/Center/VBox"]
+[node name="Subtitle" type="Label" parent="CANVASSES/Canvas/EndingScreen/Center/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.92, 0.85, 0.92)
 theme_override_font_sizes/font_size = 19
@@ -448,14 +462,14 @@ text = "The Betrayer still reigns in the shadows of the present.
 The Time Spiral has only just begun."
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="Canvas/EndingScreen/Center/VBox"]
+[node name="Hint" type="Label" parent="CANVASSES/Canvas/EndingScreen/Center/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.72, 0.58, 0.75)
 theme_override_font_sizes/font_size = 14
 text = "Returning to Timeline Origin..."
 horizontal_alignment = 1
 
-[node name="MenuButton" type="Button" parent="Canvas/EndingScreen/Center/VBox"]
+[node name="MenuButton" type="Button" parent="CANVASSES/Canvas/EndingScreen/Center/VBox"]
 visible = false
 custom_minimum_size = Vector2(250, 46)
 layout_mode = 2
@@ -466,11 +480,3 @@ theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_dialogue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_dialogue")
 text = "RETURN TO MAIN MENU"
-
-[node name="back to the present" type="AudioStreamPlayer" parent="." unique_id=249308352]
-stream = ExtResource("11_present")
-bus = &"Master"
-
-[node name="boss fight music" type="AudioStreamPlayer" parent="." unique_id=987654322]
-stream = ExtResource("12_bossfight")
-bus = &"Master"

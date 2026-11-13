@@ -1,57 +1,61 @@
 extends Node2D
 
-@onready var player = get_node_or_null("player")
-@onready var grimreaper = get_node_or_null("Grimreaper")
-@onready var thewiseone = get_node_or_null("THEWISEONE")
-@onready var allmind = get_node_or_null("ALLMIND")
-@onready var submind1 = get_node_or_null("SUBMIND1")
-@onready var submind2 = get_node_or_null("SUBMIND2")
-@onready var wizard1 = get_node_or_null("wizardbosslevel1")
-@onready var camera = get_node_or_null("EYES")
+@onready var player = get_node_or_null("SETUP/player")
+@onready var grimreaper = get_node_or_null("ENVIRONMENT/Grimreaper")
+@onready var thewiseone = get_node_or_null("ENVIRONMENT/THEWISEONE")
+@onready var allmind = get_node_or_null("ENVIRONMENT/ALLMIND")
+@onready var submind1 = get_node_or_null("ENVIRONMENT/SUBMIND1")
+@onready var submind2 = get_node_or_null("ENVIRONMENT/SUBMIND2")
+@onready var wizard1 = get_node_or_null("ENVIRONMENT/wizardbosslevel1")
+@onready var camera = get_node_or_null("SETUP/EYES")
 
-@onready var scenario = get_node_or_null("SCENARIO")
-@onready var bg_sprite1 = get_node_or_null("SCENARIO/Sprite1")
-@onready var bg_sprite2 = get_node_or_null("SCENARIO/Sprite2")
-@onready var hell_horizon_glow = get_node_or_null("SCENARIO/HellHorizonGlow")
+@onready var scenario = get_node_or_null("ENVIRONMENT/SCENARIO")
+@onready var bg_sprite1 = get_node_or_null("ENVIRONMENT/SCENARIO/Sprite1")
+@onready var bg_sprite2 = get_node_or_null("ENVIRONMENT/SCENARIO/Sprite2")
+@onready var hell_horizon_glow = get_node_or_null("ENVIRONMENT/SCENARIO/HellHorizonGlow")
 
-@onready var canvas = get_node_or_null("Canvas")
-@onready var cinematic_bars = get_node_or_null("Canvas/CinematicBLACKEDGEBars")
-@onready var top_bar = get_node_or_null("Canvas/CinematicBLACKEDGEBars/TopBar")
-@onready var bottom_bar = get_node_or_null("Canvas/CinematicBLACKEDGEBars/BottomBar")
-@onready var dialogue_box = get_node_or_null("Canvas/Dialogues")
-@onready var speaker_label = get_node_or_null("Canvas/Dialogues/outeredgeline/BOX/SPEAKER")
-@onready var dialogue_label = get_node_or_null("Canvas/Dialogues/outeredgeline/BOX/DIALOGUES TEXT")
-@onready var prompt_label = get_node_or_null("Canvas/Dialogues/outeredgeline/BOX/SKIP BUTTON")
+@onready var canvas = get_node_or_null("CANVASSES/Canvas")
+@onready var cinematic_bars = get_node_or_null("CANVASSES/Canvas/CinematicBLACKEDGEBars")
+@onready var top_bar = get_node_or_null("CANVASSES/Canvas/CinematicBLACKEDGEBars/TopBar")
+@onready var bottom_bar = get_node_or_null("CANVASSES/Canvas/CinematicBLACKEDGEBars/BottomBar")
+@onready var dialogue_box = get_node_or_null("CANVASSES/Canvas/Dialogues")
+@onready var speaker_label = get_node_or_null("CANVASSES/Canvas/Dialogues/outeredgeline/BOX/SPEAKER")
+@onready var dialogue_label = get_node_or_null("CANVASSES/Canvas/Dialogues/outeredgeline/BOX/DIALOGUES TEXT")
+@onready var prompt_label = get_node_or_null("CANVASSES/Canvas/Dialogues/outeredgeline/BOX/SKIP BUTTON")
 
-@onready var hud = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE")
-@onready var player_hp_bar = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/HEALTH/HEALTHBar")
-@onready var player_hp_text = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/HEALTH/TEXT")
-@onready var boss_vbox = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH")
-@onready var boss_label = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BossLabel")
-@onready var boss_hp_bar = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BOSSHEALTH")
-@onready var status_banner = get_node_or_null("Canvas/status")
+@onready var hud = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE")
+@onready var player_hp_bar = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/HEALTH/HEALTHBar")
+@onready var player_hp_text = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/HEALTH/TEXT")
+@onready var boss_vbox = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH")
+@onready var boss_label = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BossLabel")
+@onready var boss_hp_bar = get_node_or_null("CANVASSES/Canvas/HUDSYSTEMPROTOTYPE/BOSSHEALTH/BOSSHEALTH")
+
+var heart_icons: Array = []
+var heart_full_tex: Texture2D = null
+var heart_empty_tex: Texture2D = null
+@onready var status_banner = get_node_or_null("CANVASSES/Canvas/status")
 
 # Freeze End-Game Modal (Timeline Restored)
-@onready var timeline_modal = get_node_or_null("Canvas/TimelineModal")
-@onready var yes_button = get_node_or_null("Canvas/TimelineModal/Margin/VBox/ButtonBox/YesButton")
-@onready var no_button = get_node_or_null("Canvas/TimelineModal/Margin/VBox/ButtonBox/NoButton")
+@onready var timeline_modal = get_node_or_null("CANVASSES/Canvas/TimelineModal")
+@onready var yes_button = get_node_or_null("CANVASSES/Canvas/TimelineModal/Margin/VBox/ButtonBox/YesButton")
+@onready var no_button = get_node_or_null("CANVASSES/Canvas/TimelineModal/Margin/VBox/ButtonBox/NoButton")
 
 # Reborn Modal (Death screen)
-@onready var reborn_modal = get_node_or_null("Canvas/RebornModal")
-@onready var reborn_yes_btn = get_node_or_null("Canvas/RebornModal/Margin/VBox/ButtonBox/YesButton")
-@onready var reborn_no_btn = get_node_or_null("Canvas/RebornModal/Margin/VBox/ButtonBox/NoButton")
+@onready var reborn_modal = get_node_or_null("CANVASSES/Canvas/RebornModal")
+@onready var reborn_yes_btn = get_node_or_null("CANVASSES/Canvas/RebornModal/Margin/VBox/ButtonBox/YesButton")
+@onready var reborn_no_btn = get_node_or_null("CANVASSES/Canvas/RebornModal/Margin/VBox/ButtonBox/NoButton")
 
 # Main Menu (Rokto & Rust)
-@onready var main_menu = get_node_or_null("Canvas/MainMenu")
-@onready var menu_title = get_node_or_null("Canvas/MainMenu/CenterBox/Title")
-@onready var menu_start_btn = get_node_or_null("Canvas/MainMenu/CenterBox/StartButton")
-@onready var menu_prompt_label = get_node_or_null("Canvas/MainMenu/CenterBox/PressEnterPrompt")
+@onready var main_menu = get_node_or_null("CANVASSES/Canvas/MainMenu")
+@onready var menu_title = get_node_or_null("CANVASSES/Canvas/MainMenu/CenterBox/Title")
+@onready var menu_start_btn = get_node_or_null("CANVASSES/Canvas/MainMenu/CenterBox/StartButton")
+@onready var menu_prompt_label = get_node_or_null("CANVASSES/Canvas/MainMenu/CenterBox/PressEnterPrompt")
 
 # Audio Background Music Nodes
-@onready var main_menu_music = get_node_or_null("main menu music")
-@onready var hellfire_music = get_node_or_null("helLFIRE")
-@onready var present_music = get_node_or_null("back to the present")
-@onready var boss_fight_music = get_node_or_null("boss fight music")
+@onready var main_menu_music = get_node_or_null("MANAGERS/main menu music")
+@onready var hellfire_music = get_node_or_null("MANAGERS/helLFIRE")
+@onready var present_music = get_node_or_null("MANAGERS/back to the present")
+@onready var boss_fight_music = get_node_or_null("MANAGERS/boss fight music")
 
 var music_blend_tween: Tween = null
 
@@ -245,10 +249,8 @@ func _ready():
 	if reborn_no_btn and not reborn_no_btn.pressed.is_connected(_on_reborn_no_pressed):
 		reborn_no_btn.pressed.connect(_on_reborn_no_pressed)
 
-	if menu_start_btn and not menu_start_btn.pressed.is_connected(start_game_from_menu):
-		menu_start_btn.pressed.connect(start_game_from_menu)
-	if main_menu and main_menu.has_signal("play_game") and not main_menu.play_game.is_connected(start_game_from_menu):
-		main_menu.play_game.connect(start_game_from_menu)
+	if main_menu and main_menu.has_signal("play_game") and not main_menu.play_game.is_connected(_on_play_game_signal):
+		main_menu.play_game.connect(_on_play_game_signal)
 
 	if has_node("/root/SettingsManager"):
 		get_node("/root/SettingsManager").apply_graphics_quality(get_node("/root/SettingsManager").graphics_quality, self)
@@ -309,8 +311,9 @@ func _ready():
 
 	if hud:
 		hud.modulate.a = 0.0
+	_setup_heart_hud()
 	if player_hp_text:
-		player_hp_text.text = "NABAB AKA N'  |  HP: 8 / 8"
+		player_hp_text.text = "NABAB AKA N'"
 	if boss_vbox:
 		boss_vbox.modulate.a = 0.0
 
@@ -498,6 +501,9 @@ func _input(event):
 			advance_custom_dialogue()
 			get_viewport().set_input_as_handled()
 
+func _on_play_game_signal():
+	start_game_from_menu(true)
+
 func start_game_from_menu(instant: bool = false):
 	if not in_main_menu and not instant:
 		return
@@ -505,6 +511,9 @@ func start_game_from_menu(instant: bool = false):
 		main_menu.start_loading_sequence(func(): start_game_from_menu(true))
 		return
 	in_main_menu = false
+
+	if main_menu:
+		main_menu.visible = false
 
 	# Smoothly transition audio: fade out main menu music, fade in hellfire music!
 	if boss_fight_music:
@@ -949,11 +958,53 @@ func blend_to_level_music(duration: float = 1.4):
 			hellfire_music.play()
 		music_blend_tween.tween_property(hellfire_music, "volume_db", 0.0, duration)
 
-func _on_player_health_changed(hp, max_hp):
-	if player_hp_bar:
-		player_hp_bar.value = (hp / max_hp) * 100.0
+func _setup_heart_hud():
+	heart_full_tex = load("res://assets/sprites/ui/heart_full.png")
+	heart_empty_tex = load("res://assets/sprites/ui/heart_empty.png")
+	
+	var health_container = get_node_or_null("Canvas/HUDSYSTEMPROTOTYPE/HEALTH")
+	if health_container == null:
+		health_container = find_child("HEALTH", true, false)
+	
+	if health_container:
+		var old_bar = health_container.get_node_or_null("HEALTHBar")
+		if old_bar:
+			old_bar.visible = false
+		
+		var h_box = health_container.get_node_or_null("HeartContainer")
+		if h_box == null:
+			h_box = HBoxContainer.new()
+			h_box.name = "HeartContainer"
+			h_box.add_theme_constant_override("separation", 6)
+			health_container.add_child(h_box)
+			
+			for i in range(5):
+				var h_rect = TextureRect.new()
+				h_rect.name = "Heart_%d" % i
+				h_rect.custom_minimum_size = Vector2(28, 28)
+				h_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				h_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				h_rect.texture = heart_full_tex
+				h_box.add_child(h_rect)
+		
+		heart_icons.clear()
+		for child in h_box.get_children():
+			if child is TextureRect:
+				heart_icons.append(child)
+
+func _update_heart_hud(current_hp: float):
+	if heart_icons.is_empty():
+		_setup_heart_hud()
+	for i in range(heart_icons.size()):
+		if i < int(round(current_hp)):
+			heart_icons[i].texture = heart_full_tex
+		else:
+			heart_icons[i].texture = heart_empty_tex
+
+func _on_player_health_changed(hp, _max_hp):
+	_update_heart_hud(hp)
 	if player_hp_text:
-		player_hp_text.text = "NABAB AKA N'  |  HP: %d / 8" % [int(hp)]
+		player_hp_text.text = "NABAB AKA N'"
 
 func _on_boss_health_changed(hp, max_hp):
 	if boss_hp_bar:

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xpxbfw57cq2j"
-path="res://.godot/imported/snowberries_01.png-0d38d224f08bee6c1364f61da7a489dd.ctex"
+path="res://.godot/imported/snowberries_01.png-ca10e6b2cbeb595c4e21193c278bd8fb.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/snowberries_01.png"
-dest_files=["res://.godot/imported/snowberries_01.png-0d38d224f08bee6c1364f61da7a489dd.ctex"]
+dest_files=["res://.godot/imported/snowberries_01.png-ca10e6b2cbeb595c4e21193c278bd8fb.ctex"]
 
 [params]
 

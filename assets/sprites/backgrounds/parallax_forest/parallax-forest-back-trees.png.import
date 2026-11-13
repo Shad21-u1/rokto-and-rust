@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfdee3ru6tbb7"
-path="res://.godot/imported/parallax-forest-back-trees.png-ae3a92cccfa87f61403cd12568eadf0a.ctex"
+path="res://.godot/imported/parallax-forest-back-trees.png-1496158f2e8274a385f2468a55215069.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/backgrounds/parallax_forest/parallax-forest-back-trees.png"
-dest_files=["res://.godot/imported/parallax-forest-back-trees.png-ae3a92cccfa87f61403cd12568eadf0a.ctex"]
+dest_files=["res://.godot/imported/parallax-forest-back-trees.png-1496158f2e8274a385f2468a55215069.ctex"]
 
 [params]
 

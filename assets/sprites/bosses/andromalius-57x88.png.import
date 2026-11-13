@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwxxrf2ugek8x"
-path="res://.godot/imported/andromalius-57x88.png-f4be9f29ecd6750fe186f1cf62c89ce3.ctex"
+path="res://.godot/imported/andromalius-57x88.png-f1ea23d1caa79458a52441f4da579bce.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/bosses/andromalius-57x88.png"
-dest_files=["res://.godot/imported/andromalius-57x88.png-f4be9f29ecd6750fe186f1cf62c89ce3.ctex"]
+dest_files=["res://.godot/imported/andromalius-57x88.png-f1ea23d1caa79458a52441f4da579bce.ctex"]
 
 [params]
 

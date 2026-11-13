@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d14nuqk2ll20m"
-path="res://.godot/imported/apple_red_01.png-bfc7cc4d86ab97add731ea43ad59a5fa.ctex"
+path="res://.godot/imported/apple_red_01.png-5dece1766b5121055a75713a20b303a9.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/apple_red_01.png"
-dest_files=["res://.godot/imported/apple_red_01.png-bfc7cc4d86ab97add731ea43ad59a5fa.ctex"]
+dest_files=["res://.godot/imported/apple_red_01.png-5dece1766b5121055a75713a20b303a9.ctex"]
 
 [params]
 

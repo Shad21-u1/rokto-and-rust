@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbkqha52m0cab"
-path="res://.godot/imported/blackberry_01.png-f079038810b73ecfd8982d7e8b9256de.ctex"
+path="res://.godot/imported/blackberry_01.png-5a3020510ea0c42e3f5d46b3dd6a7c1e.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/blackberry_01.png"
-dest_files=["res://.godot/imported/blackberry_01.png-f079038810b73ecfd8982d7e8b9256de.ctex"]
+dest_files=["res://.godot/imported/blackberry_01.png-5a3020510ea0c42e3f5d46b3dd6a7c1e.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bsomhn6j2cg11"
-path="res://.godot/imported/roots_01.png-e1b546890a807396aa5fd278f80a02af.ctex"
+path="res://.godot/imported/roots_01.png-f44ee1a0acbce67f2711c9003d2aecb2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/sprites/tiles/roots_01.png"
-dest_files=["res://.godot/imported/roots_01.png-e1b546890a807396aa5fd278f80a02af.ctex"]
+dest_files=["res://.godot/imported/roots_01.png-f44ee1a0acbce67f2711c9003d2aecb2.ctex"]
 
 [params]
 
